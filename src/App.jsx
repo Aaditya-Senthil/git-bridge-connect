@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Sidebar from './component/SideBar';
-import MainContent from './component/Maincontent';
+import MainContent from './component/MainContent';
 import { UserProvider } from './UserContext';
 import { useResponsive } from './component/Hooks/useResponsive';
 
