@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react';
-import '../../Styles/Fileupload.css'; 
+import '../../Styles/FileUpload.css'; 
 
 const FileUpload = React.memo(({ onFilesSelected, value = [] }) => {
   const [files, setFiles] = useState(value);

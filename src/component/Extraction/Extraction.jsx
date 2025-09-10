@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useUser } from '../../UserContext';
-import FileUpload from "./FileUpload";
+import FileUpload from "./Fileupload";
 
 const Extraction = () => {
   const { 
