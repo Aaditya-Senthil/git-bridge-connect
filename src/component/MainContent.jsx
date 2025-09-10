@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Router from '../Router';
 import '../Styles/main.css';
-import Breadcrumb from './BreadCrum';
+import Breadcrumb from './Breadcrum';
 import { useResponsive } from './Hooks/useResponsive';
 import { useUser } from '../UserContext';
 
