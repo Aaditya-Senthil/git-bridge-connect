@@ -216,38 +216,64 @@ const Extraction = () => {
   };
 
   return (
-<div className="extraction">
-  <div className="extraction__tabs">
-    <button className="extraction__tab extraction__tab--active">Schema</button>
-  </div>
+    <div className="extraction">
+      {/* Hero Section for Better First Impression */}
+      <div className="extraction__hero">
+        <h1 className="extraction__hero-title">Document Data Extraction</h1>
+        <p className="extraction__hero-subtitle">
+          Define your data schema, upload documents, and extract structured information instantly
+        </p>
+      </div>
 
-  <div className="extraction__content">
-    <div className="extraction__panel--left">
-      <div className="extraction__agent-config">
-        <h2>Agent Configuration</h2>
-
-        <div className="extraction__fields">
-          {fields.map((field, index) => (
-            <div className="extraction__field" key={index}>
-              <div className="extraction__field-name">{field.name}</div>
-              <button
-                className="extraction__remove-btn"
-                onClick={() => handleRemoveField(index)}
-              >
-                ✕
-              </button>
+      <div className="extraction__content">
+        <div className="extraction__panel--left">
+          <div className="extraction__agent-config">
+            <h3>📋 Define Your Data Schema</h3>
+            <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: 'var(--font-size-sm)' }}>
+              Add the fields you want to extract from your documents
+            </p>
+            
+            {/* Fields list */}
+            <div className="extraction__fields">
+              {fields.map((field, index) => (
+                <div key={index} className="extraction__field">
+                  <span className="extraction__field-name">{field.name}</span>
+                  <span className="extraction__field-type">({field.type})</span>
+                  <button 
+                    className="extraction__remove-btn"
+                    onClick={() => handleRemoveField(index)}
+                    aria-label={`Remove ${field.name} field`}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+              
+              {fields.length === 0 && (
+                <div style={{ 
+                  padding: 'var(--spacing-lg)', 
+                  textAlign: 'center', 
+                  color: 'var(--color-text-secondary)',
+                  border: '2px dashed var(--color-border)',
+                  borderRadius: 'var(--border-radius-md)',
+                  marginBottom: 'var(--spacing-md)'
+                }}>
+                  <p>No fields defined yet</p>
+                  <p style={{ fontSize: 'var(--font-size-sm)' }}>Add your first field below to get started</p>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-
-        <div className="extraction__new-field">
-          <input
-            type="text"
-            name="FieldName"
-            value={newField.FieldName}
-            onChange={handleInputChange}
-            placeholder="Enter Field Name"
-          />
+            
+            {/* New field form */}
+            <div className="extraction__new-field">
+              <input
+                type="text"
+                placeholder="e.g., Customer Name, Invoice Number..."
+                name="FieldName"
+                value={newField.FieldName}
+                onChange={handleInputChange}
+                className="extraction__field-input"
+              />
         </div>
 
         <button className="extraction__add-field-btn" onClick={handleAddField}>

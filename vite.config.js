@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => {
   return {
     base: baseUrl,  // Set the base URL for assets
     plugins: [react()],
+    server: {
+      port: 8080
+    },
     define: {
       'process.env': env
     }

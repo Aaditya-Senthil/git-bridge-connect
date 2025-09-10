@@ -1,13 +1,14 @@
-/* Extraction Component (BEM) */
+/* Extraction Component (BEM) - Mobile-First UX */
 
 /* Root block */
 .extraction {
   flex: 1;
   display: flex;
-  height: 90vh;
+  min-height: 100vh;
   flex-direction: column;
   background: var(--color-bg);
   color: var(--color-text-primary);
+  position: relative;
 }
 
 /* Tabs */
@@ -39,23 +40,51 @@
   border-bottom-color: var(--color-primary);
 }
 
-/* Content layout */
+/* Content layout - Mobile-First */
 .extraction__content {
   display: flex;
   flex: 1;
   overflow: hidden;
+  gap: var(--spacing-lg);
 }
 
-/* Panels */
+/* Hero Section for Better UX */
+.extraction__hero {
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.extraction__hero-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.extraction__hero-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+/* Panels - Improved Mobile Layout */
 .extraction__panel--left,
 .extraction__panel--right {
   flex: 1;
   overflow-y: auto;
   padding: var(--spacing-lg);
+  min-width: 0; /* Prevents flex overflow */
 }
 
 .extraction__panel--left {
   border-right: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.extraction__panel--right {
+  background: var(--color-bg-alt);
 }
 
 /* Agent config (inner block) */
@@ -244,23 +273,99 @@
   100% { transform: rotate(360deg); }
 }
 
-/* MEDIA QUERIES */
+/* Hero Section for Better UX */
+.extraction__hero {
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.extraction__hero-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.extraction__hero-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+/* MEDIA QUERIES - Mobile-First Responsive Design */
 @media (max-width: 768px) {
+  .extraction {
+    min-height: 100vh;
+  }
+  
+  .extraction__hero {
+    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .extraction__hero-title {
+    font-size: var(--font-size-xl);
+  }
+  
   .extraction__content {
     flex-direction: column;
+    gap: 0;
   }
 
   .extraction__panel--left,
   .extraction__panel--right {
     width: 100%;
+    padding: var(--spacing-md);
+    border-radius: 0;
+  }
+  
+  .extraction__panel--left {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+  
+  .extraction__panel--right {
+    background: var(--color-bg);
   }
 
   .extraction__actions {
     flex-direction: column;
+    position: sticky;
+    bottom: 0;
+    background: var(--color-bg);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--color-border);
+    margin: 0 calc(-1 * var(--spacing-md));
+    z-index: 10;
   }
 
   .extraction__actions button {
     width: 100%;
+    min-height: 48px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-md);
+  }
+  
+  /* Better touch targets */
+  .extraction__action-btn,
+  .extraction__add-field-btn {
+    min-height: 48px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-md);
+  }
+}
+
+/* Small mobile optimization */
+@media (max-width: 480px) {
+  .extraction__hero {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .extraction__panel--left,
+  .extraction__panel--right {
+    padding: var(--spacing-sm);
   }
 }
 

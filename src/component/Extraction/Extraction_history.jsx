@@ -133,25 +133,100 @@ const DocumentHistoryTable = () => {
   return (
     <div className="extraction-history">
       <div className="extraction-history__header">
-        <h2 className="extraction-history__title">Extraction History</h2>
-        <p className="extraction-history__subtitle">View your document extraction results</p>
+        <div>
+          <h2 className="extraction-history__title">📁 Extraction History</h2>
+          <p className="extraction-history__subtitle">Browse and manage your extracted documents</p>
+        </div>
         <div className="extraction-history__header-actions">
           <button
             onClick={() => fetchDocumentHistory(true)}
             className="extraction-history__refresh-btn"
             disabled={historyLoading}
           >
-            {historyLoading ? 'Refreshing...' : 'Refresh'}
+            {historyLoading ? '🔄 Refreshing...' : '🔄 Refresh'}
           </button>
         </div>
       </div>
 
       {historyError && documentHistory.length > 0 && (
         <div className="extraction-history__error-banner">
-          Failed to refresh: {historyError}
+          ⚠️ Failed to refresh: {historyError}
         </div>
       )}
 
+      {/* Card Layout for Mobile */}
+      <div className="extraction-history__cards-container">
+        {documentHistory.map((doc) => (
+          <div key={doc.id} className="extraction-history__card">
+            <div className="extraction-history__card-header">
+              <div className="extraction-history__file-name-info">
+                <span className="extraction-history__file-name-text">{doc.fileName}</span>
+                <span className="extraction-history__file-date">{doc.createdAt}</span>
+              </div>
+              <div className="extraction-history__card-status">
+                <span
+                  className={`extraction-history__status-badge ${
+                    doc.status === 'SUCCESS'
+                      ? 'extraction-history__status-badge--success'
+                      : doc.status === 'PENDING'
+                      ? 'extraction-history__status-badge--pending'
+                      : 'extraction-history__status-badge--error'
+                  }`}
+                >
+                  {doc.status === 'SUCCESS' ? '✅' : doc.status === 'PENDING' ? '⏳' : '❌'} {doc.status}
+                </span>
+              </div>
+            </div>
+
+            <div className="extraction-history__extracted-fields">
+              {getExtractedFields(doc).map((field, idx) => (
+                <span key={idx} className="extraction-history__field-tag">
+                  {field}
+                </span>
+              ))}
+              {getExtractedFields(doc).length === 0 && (
+                <span className="extraction-history__no-fields">No fields extracted</span>
+              )}
+            </div>
+
+            {expandedRows.has(doc.id) && (
+              <div className="extraction-history__expanded-content">
+                {renderExtractionResults(doc)}
+              </div>
+            )}
+
+            <div className="extraction-history__actions-buttons">
+              <button
+                onClick={() => handleAction('download', doc)}
+                className="extraction-history__action-btn extraction-history__download-btn"
+                title="Download PDF"
+              >
+                📄 Download
+              </button>
+              {doc.status === 'SUCCESS' && (
+                <button
+                  onClick={() => toggleRowExpansion(doc.id)}
+                  className={`extraction-history__action-btn extraction-history__view-btn ${
+                    expandedRows.has(doc.id) ? 'extraction-history__view-btn--active' : ''
+                  }`}
+                  title={expandedRows.has(doc.id) ? 'Hide Results' : 'View Results'}
+                >
+                  {expandedRows.has(doc.id) ? '🔽 Hide' : '▶️ View'}
+                </button>
+              )}
+              <button
+                onClick={() => handleAction('delete', doc)}
+                className="extraction-history__action-btn extraction-history__delete-btn"
+                title="Delete Document"
+              >
+                🗑️ Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Table Layout for Desktop */}
       <div className="extraction-history__table-container">
         <table className="extraction-history__table">
           <thead className="extraction-history__table-header">
