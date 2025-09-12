@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useUser } from '../../UserContext';
 import FileUpload from "./Fileupload";
 
@@ -16,6 +16,16 @@ const Extraction = () => {
     Datatype: "string",
   });
   const [fields, setFields] = useState([]);
+
+  // Left-panel upload button support
+  const fileInputRefLeft = useRef(null);
+  const handleOpenFilePicker = () => fileInputRefLeft.current && fileInputRefLeft.current.click();
+  const handleFileSelectedLeft = (e) => {
+    const files = e.target.files && e.target.files.length > 0 ? Array.from(e.target.files) : [];
+    setUploadedFiles(files);
+    // allow re-selecting the same file
+    e.target.value = '';
+  };
 
   const EXTRACTION_API = "https://fn3yrpr3gl.execute-api.ap-south-1.amazonaws.com/Production/extraction";
   const STATUS_API_BASE = "https://fn3yrpr3gl.execute-api.ap-south-1.amazonaws.com/Production/status";
@@ -233,6 +243,21 @@ const Extraction = () => {
               Add the fields you want to extract from your documents
             </p>
             
+            {/* Upload shortcut */}
+            <div className="extraction__upload">
+              <input
+                type="file"
+                ref={fileInputRefLeft}
+                onChange={handleFileSelectedLeft}
+                accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg"
+                style={{ display: 'none' }}
+              />
+              <button className="extraction__upload-btn" onClick={handleOpenFilePicker} aria-label="Upload document">
+                📤 Upload document
+              </button>
+              <p className="extraction__hint">Then add fields below and tap Start extraction.</p>
+            </div>
+
             {/* Fields list */}
             <div className="extraction__fields">
               {fields.map((field, index) => (
