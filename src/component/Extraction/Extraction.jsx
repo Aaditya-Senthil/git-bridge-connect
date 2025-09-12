@@ -227,118 +227,120 @@ const Extraction = () => {
 
   return (
     <div className="extraction">
-      {/* Hero Section for Better First Impression */}
+      {/* Clean, minimal hero */}
       <div className="extraction__hero">
-        <h1 className="extraction__hero-title">Document Data Extraction</h1>
+        <h1 className="extraction__hero-title">AI Document Extraction</h1>
         <p className="extraction__hero-subtitle">
-          Define your data schema, upload documents, and extract structured information instantly
+          Upload any document and let our AI intelligently extract the information you need
         </p>
       </div>
 
       <div className="extraction__content">
-        <div className="extraction__panel--left">
-          <div className="extraction__agent-config">
-            <h3>📋 Define Your Data Schema</h3>
-            <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--spacing-md)', fontSize: 'var(--font-size-sm)' }}>
-              Add the fields you want to extract from your documents
-            </p>
-            
-            {/* Upload shortcut */}
-            <div className="extraction__upload">
-              <input
-                type="file"
-                ref={fileInputRefLeft}
-                onChange={handleFileSelectedLeft}
-                accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg"
-                style={{ display: 'none' }}
-              />
-              <button className="extraction__upload-btn" onClick={handleOpenFilePicker} aria-label="Upload document">
-                📤 Upload document
-              </button>
-              <p className="extraction__hint">Then add fields below and tap Start extraction.</p>
+        {/* Step 1: Upload Only */}
+        {!uploadedFiles.length && (
+          <div className="extraction__upload-zone">
+            <input
+              type="file"
+              ref={fileInputRefLeft}
+              onChange={handleFileSelectedLeft}
+              accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg"
+              style={{ display: 'none' }}
+            />
+            <div className="extraction__upload-card" onClick={handleOpenFilePicker}>
+              <div className="extraction__upload-icon">📄</div>
+              <h3>Upload Your Document</h3>
+              <p>Drag & drop or click to select your file</p>
+              <span className="extraction__supported-formats">
+                PDF, Word, Images supported
+              </span>
             </div>
-
-            {/* Fields list */}
-            <div className="extraction__fields">
-              {fields.map((field, index) => (
-                <div key={index} className="extraction__field">
-                  <span className="extraction__field-name">{field.name}</span>
-                  <span className="extraction__field-type">({field.type})</span>
-                  <button 
-                    className="extraction__remove-btn"
-                    onClick={() => handleRemoveField(index)}
-                    aria-label={`Remove ${field.name} field`}
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-              
-              {fields.length === 0 && (
-                <div style={{ 
-                  padding: 'var(--spacing-lg)', 
-                  textAlign: 'center', 
-                  color: 'var(--color-text-secondary)',
-                  border: '2px dashed var(--color-border)',
-                  borderRadius: 'var(--border-radius-md)',
-                  marginBottom: 'var(--spacing-md)'
-                }}>
-                  <p>No fields defined yet</p>
-                  <p style={{ fontSize: 'var(--font-size-sm)' }}>Add your first field below to get started</p>
-                </div>
-              )}
-            </div>
-            
-            {/* New field form */}
-            <div className="extraction__new-field">
-              <input
-                type="text"
-                placeholder="e.g., Customer Name, Invoice Number..."
-                name="FieldName"
-                value={newField.FieldName}
-                onChange={handleInputChange}
-                className="extraction__field-input"
-              />
-        </div>
-
-        <button className="extraction__add-field-btn" onClick={handleAddField}>
-          + Add Field
-        </button>
-
-        {(isLoading || statusMessage) && (
-          <div className="extraction__status">
-            <h3>Extraction Status:</h3>
-            {jobId && <p><strong>Job ID:</strong> {jobId}</p>}
-            {statusMessage && <p><strong>Message:</strong> {statusMessage}</p>}
-            {isLoading && (
-              <div className="extraction__loading">
-                <div className="extraction__spinner"></div>
-                <span>Processing...</span>
-              </div>
-            )}
           </div>
         )}
 
-        <div className="extraction__actions">
-          <button 
-            className="extraction__action-btn"
-            onClick={handleExtraction}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Processing...' : 'Start Extraction'}
-          </button>
+        {/* Step 2: Progressive UI after upload */}
+        {uploadedFiles.length > 0 && (
+          <div className="extraction__workflow">
+            <div className="extraction__panel--left">
+              <div className="extraction__step-header">
+                <h3>✨ What information do you need?</h3>
+                <p>Add the specific fields you want extracted from your document</p>
+              </div>
+              
+              {/* Compact fields display */}
+              {fields.length > 0 && (
+                <div className="extraction__fields-compact">
+                  {fields.map((field, index) => (
+                    <div key={index} className="extraction__field-tag">
+                      <span>{field.name}</span>
+                      <button 
+                        className="extraction__remove-tag"
+                        onClick={() => handleRemoveField(index)}
+                        aria-label={`Remove ${field.name}`}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {/* Simple add field */}
+              <div className="extraction__add-field">
+                <input
+                  type="text"
+                  placeholder="e.g., Invoice Number, Customer Name..."
+                  name="FieldName"
+                  value={newField.FieldName}
+                  onChange={handleInputChange}
+                  onKeyPress={(e) => e.key === 'Enter' && handleAddField()}
+                  className="extraction__field-input"
+                />
+                <button className="extraction__add-btn" onClick={handleAddField}>
+                  Add
+                </button>
+              </div>
 
+              {fields.length > 0 && (
+                <button 
+                  className="extraction__start-btn"
+                  onClick={handleExtraction}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Extracting...' : 'Extract Information'}
+                </button>
+              )}
 
-        </div>
+              {(isLoading || statusMessage) && (
+                <div className="extraction__status">
+                  {isLoading && (
+                    <div className="extraction__loading">
+                      <div className="extraction__spinner"></div>
+                      <span>AI is analyzing your document...</span>
+                    </div>
+                  )}
+                  {statusMessage && !isLoading && <p>{statusMessage}</p>}
+                </div>
+              )}
+            </div>
 
+            <div className="extraction__panel--right">
+              <FileUpload
+                onFilesSelected={setUploadedFiles}
+                value={uploadedFiles}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Results */}
         {result && result.data && (
           <div className="extraction__results">
-            <h3>Extraction Results:</h3>
-            <div className="extraction__results-container">
+            <h3>Extracted Information</h3>
+            <div className="extraction__results-grid">
               {Object.entries(result.data).map(([question, answer]) => (
-                <div key={question} className="extraction__result-item">
-                  <div className="extraction__question"><strong>{question}</strong></div>
-                  <div className="extraction__answer">{answer}</div>
+                <div key={question} className="extraction__result-card">
+                  <div className="extraction__result-label">{question}</div>
+                  <div className="extraction__result-value">{answer}</div>
                 </div>
               ))}
             </div>
@@ -346,15 +348,6 @@ const Extraction = () => {
         )}
       </div>
     </div>
-
-    <div className="extraction__panel--right">
-      <FileUpload
-        onFilesSelected={setUploadedFiles}
-        value={uploadedFiles}
-      />
-    </div>
-  </div>
-</div>
 
   );
 };

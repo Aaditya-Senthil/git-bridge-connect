@@ -48,12 +48,11 @@
   gap: var(--spacing-lg);
 }
 
-/* Hero Section for Better UX */
+/* Clean hero section */
 .extraction__hero {
-  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-lg);
   text-align: center;
-  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
 .extraction__hero-title {
@@ -64,9 +63,12 @@
 }
 
 .extraction__hero-subtitle {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
   color: var(--color-text-secondary);
   margin-bottom: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Panels - Improved Mobile Layout */
@@ -95,33 +97,173 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* Upload button */
-.extraction__upload {
-  margin-bottom: var(--spacing-md);
+/* Initial upload zone */
+.extraction__upload-zone {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: var(--spacing-xl);
 }
 
-.extraction__upload-btn {
-  align-self: flex-start;
+.extraction__upload-card {
+  background: var(--color-bg-alt);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  width: 100%;
+}
+
+.extraction__upload-card:hover {
+  border-color: var(--color-primary);
   background: var(--color-bg);
-  color: var(--color-primary);
-  border: 2px dashed var(--color-primary);
-  padding: var(--spacing-sm) var(--spacing-lg);
+  transform: translateY(-2px);
+}
+
+.extraction__upload-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.extraction__upload-card h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.extraction__upload-card p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.extraction__supported-formats {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+/* Progressive workflow */
+.extraction__workflow {
+  display: flex;
+  gap: var(--spacing-lg);
+  min-height: 60vh;
+}
+
+.extraction__step-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.extraction__step-header h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.extraction__step-header p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Compact field tags */
+.extraction__fields-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.extraction__field-tag {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.extraction__remove-tag {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extraction__remove-tag:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Simple add field */
+.extraction__add-field {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.extraction__field-input {
+  flex: 1;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.extraction__field-input:focus {
+  border-color: var(--color-primary);
+}
+
+.extraction__add-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  transition: background 0.2s ease;
+}
+
+.extraction__add-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+.extraction__start-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--border-radius-md);
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  font-size: var(--font-size-md);
+  width: 100%;
+  transition: background 0.2s ease;
 }
 
-.extraction__upload-btn:hover {
-  background: var(--color-sidebar-item-hover);
+.extraction__start-btn:hover:not(:disabled) {
+  background: var(--color-primary-dark);
 }
 
-.extraction__hint {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
+.extraction__start-btn:disabled {
+  background: var(--color-border);
+  cursor: not-allowed;
 }
 
 /* Fields */
@@ -261,39 +403,45 @@
   border: 1px solid var(--color-border);
 }
 
-/* Results */
+/* Clean results display */
 .extraction__results {
   margin-top: var(--spacing-xl);
-  border-top: 2px solid var(--color-border);
-  padding-top: var(--spacing-lg);
+  padding: var(--spacing-lg);
 }
 
-.extraction__results-container {
-  max-height: 400px;
-  overflow-y: auto;
-  background: var(--color-bg-alt);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-sm);
-}
-
-.extraction__result-item {
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md);
-  background: var(--color-bg);
-}
-
-.extraction__question {
-  margin-bottom: var(--spacing-sm);
+.extraction__results h3 {
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
 }
 
-.extraction__answer {
+.extraction__results-grid {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+}
+
+.extraction__result-card {
+  background: var(--color-bg-alt);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.extraction__result-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.extraction__result-value {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
   line-height: 1.5;
-  white-space: pre-wrap;
 }
 
 /* Spinner keyframes */
@@ -325,67 +473,48 @@
 
 /* MEDIA QUERIES - Mobile-First Responsive Design */
 @media (max-width: 768px) {
-  .extraction {
-    min-height: 100vh;
-  }
-  
   .extraction__hero {
-    padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-md);
   }
   
   .extraction__hero-title {
     font-size: var(--font-size-xl);
   }
-  
-  .extraction__content {
+
+  .extraction__upload-zone {
+    min-height: 50vh;
+    padding: var(--spacing-md);
+  }
+
+  .extraction__upload-card {
+    padding: var(--spacing-lg);
+  }
+
+  .extraction__workflow {
     flex-direction: column;
-    gap: 0;
+    gap: var(--spacing-md);
   }
 
   .extraction__panel--left,
   .extraction__panel--right {
     width: 100%;
     padding: var(--spacing-md);
-    border-radius: 0;
   }
   
   .extraction__panel--left {
-    border-right: none;
     border-bottom: 1px solid var(--color-border);
-    background: var(--color-bg);
-  }
-  
-  .extraction__panel--right {
-    background: var(--color-bg);
   }
 
-  .extraction__actions {
+  .extraction__add-field {
     flex-direction: column;
-    position: sticky;
-    bottom: 0;
-    background: var(--color-bg);
-    padding: var(--spacing-md);
-    border-top: 1px solid var(--color-border);
-    margin: 0 calc(-1 * var(--spacing-md));
-    z-index: 10;
   }
 
-  .extraction__actions button {
+  .extraction__add-btn {
     width: 100%;
-    min-height: 48px;
-    padding: var(--spacing-md) var(--spacing-lg);
-    font-size: var(--font-size-md);
   }
-  
-  /* Better touch targets */
-  .extraction__action-btn,
-  .extraction__add-field-btn {
-    min-height: 48px;
-    padding: var(--spacing-md) var(--spacing-lg);
-    font-size: var(--font-size-md);
-  }
-  .extraction__upload-btn {
-    width: 100%;
+
+  .extraction__results-grid {
+    grid-template-columns: 1fr;
   }
 }
 
