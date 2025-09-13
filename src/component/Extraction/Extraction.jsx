@@ -262,8 +262,8 @@ const Extraction = () => {
           <div className="extraction__workflow">
             <div className="extraction__panel--left">
               <div className="extraction__step-header">
-                <h3>✨ What information do you need?</h3>
-                <p>Add the specific fields you want extracted from your document</p>
+                <h3>✨ What would you like to extract?</h3>
+                <p>Simply describe the information you need in natural language</p>
               </div>
               
               {/* Compact fields display */}
@@ -284,19 +284,19 @@ const Extraction = () => {
                 </div>
               )}
               
-              {/* Simple add field */}
+              {/* Natural language prompt input */}
               <div className="extraction__add-field">
-                <input
-                  type="text"
-                  placeholder="e.g., Invoice Number, Customer Name..."
+                <textarea
+                  placeholder="What do you want to extract? e.g., 'Find the total amount and customer name' or 'Extract all dates and signatures'"
                   name="FieldName"
                   value={newField.FieldName}
                   onChange={handleInputChange}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddField()}
-                  className="extraction__field-input"
+                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleAddField()}
+                  className="extraction__field-input extraction__field-textarea"
+                  rows="3"
                 />
                 <button className="extraction__add-btn" onClick={handleAddField}>
-                  Add
+                  Add Field
                 </button>
               </div>
 

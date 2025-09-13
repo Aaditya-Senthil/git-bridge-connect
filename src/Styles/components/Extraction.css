@@ -76,19 +76,21 @@
 .extraction__panel--right {
   background: var(--color-bg);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
-  min-height: 500px;
+  padding: var(--spacing-md);
 }
 
 /* Panel specific styles */
 .extraction__panel--left {
   border: 1px solid var(--color-border);
   background: var(--color-bg);
+  max-height: fit-content;
 }
 
 .extraction__panel--right {
   border: 1px solid var(--color-border);
   background: var(--color-bg-alt);
+  max-height: 400px;
+  overflow: hidden;
 }
 
 /* Agent config (inner block) */
@@ -156,11 +158,11 @@
 .extraction__workflow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-xl);
-  min-height: 60vh;
-  max-width: 1200px;
+  gap: var(--spacing-lg);
+  align-items: start;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md);
 }
 
 .extraction__step-header {
@@ -232,6 +234,13 @@
   font-size: var(--font-size-sm);
   outline: none;
   transition: border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.extraction__field-textarea {
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.4;
 }
 
 .extraction__field-input:focus {
@@ -257,12 +266,13 @@
   background: var(--color-primary);
   color: white;
   border: none;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-md);
-  width: 100%;
+  font-size: var(--font-size-sm);
+  width: auto;
+  margin-top: var(--spacing-sm);
   transition: background 0.2s ease;
 }
 
