@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Sidebar from './component/SideBar';
 import MainContent from './component/MainContent';
@@ -9,6 +9,11 @@ import './App.css';
 
 const AppContent = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Set dark mode as default
+  useEffect(() => {
+    document.documentElement.classList.add('theme-dark');
+  }, []);
 
   const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);

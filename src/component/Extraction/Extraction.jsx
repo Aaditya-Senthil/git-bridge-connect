@@ -284,20 +284,34 @@ const Extraction = () => {
                 </div>
               )}
               
-              {/* Natural language prompt input */}
-              <div className="extraction__add-field">
-                <textarea
-                  placeholder="What do you want to extract? e.g., 'Find the total amount and customer name' or 'Extract all dates and signatures'"
-                  name="FieldName"
-                  value={newField.FieldName}
-                  onChange={handleInputChange}
-                  onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleAddField()}
-                  className="extraction__field-input extraction__field-textarea"
-                  rows="3"
-                />
-                <button className="extraction__add-btn" onClick={handleAddField}>
-                  Add Field
-                </button>
+              {/* Chat-like prompt input */}
+              <div className="extraction__chat-input">
+                <div className="extraction__input-container">
+                  <textarea
+                    placeholder="Describe what you want to extract... e.g., 'Find all contact information and invoice details'"
+                    name="FieldName"
+                    value={newField.FieldName}
+                    onChange={handleInputChange}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleAddField();
+                      }
+                    }}
+                    className="extraction__chat-textarea"
+                    rows="2"
+                  />
+                  <button 
+                    className="extraction__send-btn" 
+                    onClick={handleAddField}
+                    disabled={!newField.FieldName.trim()}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               {fields.length > 0 && (
