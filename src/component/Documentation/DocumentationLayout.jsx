@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Menu, X, Moon, Sun, GitHub, Mail, Copy, Check } from 'lucide-react';
+import { Search, Menu, X, Moon, Sun, Github, Mail, Copy, Check } from 'lucide-react';
 import './Documentation.css';
 
 const DocumentationLayout = () => {
@@ -329,7 +329,7 @@ const DocumentationLayout = () => {
           <div className="docs-footer-section">
             <h3>Community</h3>
             <ul>
-              <li><a href="#github"><GitHub size={16} /> GitHub</a></li>
+              <li><a href="#github"><Github size={16} /> GitHub</a></li>
               <li><a href="#contact"><Mail size={16} /> Contact</a></li>
               <li><a href="#support">Support</a></li>
             </ul>

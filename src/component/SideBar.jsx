@@ -4,15 +4,12 @@ import { useUser } from '../UserContext';
 import { useResponsive } from './Hooks/useResponsive';
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const { 
-    documentHistory, 
-    historyLoading, 
-    historyLastFetched,
-    currentExtraction 
-  } = useUser();
+  const userCtx = (typeof useUser === 'function') ? useUser() : null;
+  const documentHistory = userCtx?.documentHistory || [];
+  const currentExtraction = userCtx?.currentExtraction || {};
   const { isMobile } = useResponsive();
   
-  const { isLoading } = currentExtraction || {};
+  const { isLoading } = currentExtraction;
 
   // Only show sidebar if we have actual documents in history
   if (documentHistory.length === 0) {
@@ -81,7 +78,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           Settings
         </NavLink>
 
-        <NavLink to="/documentation" className="sidebar__item" onClick={handleLinkClick}>
+        <NavLink to="/documentation" target="_blank" rel="noopener noreferrer" className="sidebar__item" onClick={handleLinkClick}>
           <span className="sidebar__icon sidebar__icon--status"></span>
           Documentation
         </NavLink>
