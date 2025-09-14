@@ -7,10 +7,12 @@ const Extraction = () => {
     userId, 
     currentExtraction, 
     updateCurrentExtraction,
-    clearCurrentExtraction 
+    clearCurrentExtraction,
+    uploadedFiles,
+    setUploadedFiles
   } = useUser();
   
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  // Files are now managed in UserContext for persistence
   const [newField, setNewField] = useState({
     FieldName: "",
     Datatype: "string",
@@ -335,6 +337,21 @@ const Extraction = () => {
                   {statusMessage && !isLoading && <p>{statusMessage}</p>}
                 </div>
               )}
+
+              {/* Results displayed directly below extraction button */}
+              {result && result.data && (
+                <div className="extraction__results">
+                  <h3>Extracted Information</h3>
+                  <div className="extraction__results-grid">
+                    {Object.entries(result.data).map(([question, answer]) => (
+                      <div key={question} className="extraction__result-card">
+                        <div className="extraction__result-label">{question}</div>
+                        <div className="extraction__result-value">{answer}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="extraction__panel--right">
@@ -346,20 +363,7 @@ const Extraction = () => {
           </div>
         )}
 
-        {/* Results */}
-        {result && result.data && (
-          <div className="extraction__results">
-            <h3>Extracted Information</h3>
-            <div className="extraction__results-grid">
-              {Object.entries(result.data).map(([question, answer]) => (
-                <div key={question} className="extraction__result-card">
-                  <div className="extraction__result-label">{question}</div>
-                  <div className="extraction__result-value">{answer}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* Results moved to left panel - this section removed */}
       </div>
     </div>
 

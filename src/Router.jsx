@@ -4,6 +4,7 @@ import Extraction from './component/Extraction/Extraction';
 import Analytics from './component/Analytics/Analytics';
 import Extraction_History from './component/Extraction/Extraction_history';
 import Settings from './component/Setting';
+import Documentation from './component/Documentation';
 
 const Router = () => {
   return (
@@ -14,7 +15,7 @@ const Router = () => {
   <Route path="/analytics" element={<Analytics />} />
   <Route path="/History" element={<Extraction_History />} />
   <Route path="/settings" element={<Settings />} />
-  <Route path="/documentation" element={<documentation />} />
+  <Route path="/documentation" element={<Documentation />} />
   <Route path="*" element={<Extraction />} />
 </Routes>
 

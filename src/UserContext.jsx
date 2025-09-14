@@ -38,6 +38,9 @@ export const UserProvider = ({ children }) => {
     result: null
   });
 
+  // Uploaded files state - persist across navigation
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   // Update current extraction state (NEW)
   const updateCurrentExtraction = useCallback((updates) => {
     setCurrentExtraction(prev => ({ ...prev, ...updates }));
@@ -278,6 +281,10 @@ export const UserProvider = ({ children }) => {
     currentExtraction,
     updateCurrentExtraction,
     clearCurrentExtraction,
+    
+    // Uploaded Files Management
+    uploadedFiles,
+    setUploadedFiles,
     
     // API Endpoints
     STATUS_API_BASE,
