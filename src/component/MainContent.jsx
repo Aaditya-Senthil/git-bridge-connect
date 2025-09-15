@@ -10,7 +10,8 @@ import { useUser } from '../UserContext';
 const MainContent = ({ onToggleSidebar, sidebarOpen }) => {
   const location = useLocation();
   const { isMobile } = useResponsive();
-  const { documentHistory } = useUser();
+  const userCtx = (typeof useUser === 'function') ? useUser() : null;
+  const documentHistory = userCtx?.documentHistory || [];
   
   const hasSidebar = documentHistory.length > 0;
   

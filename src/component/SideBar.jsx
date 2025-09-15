@@ -78,10 +78,10 @@ const Sidebar = ({ isOpen, onClose }) => {
           Settings
         </NavLink>
 
-        <NavLink to="/documentation" target="_blank" rel="noopener noreferrer" className="sidebar__item" onClick={handleLinkClick}>
+        <a href="/documentation" target="_blank" rel="noopener noreferrer" className="sidebar__item" onClick={handleLinkClick}>
           <span className="sidebar__icon sidebar__icon--status"></span>
           Documentation
-        </NavLink>
+        </a>
       </div>
 
       <div className="sidebar__user">

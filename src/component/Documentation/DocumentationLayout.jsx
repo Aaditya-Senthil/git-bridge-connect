@@ -16,6 +16,14 @@ const DocumentationLayout = () => {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const sidebarNavigation = [
     {
       title: 'Getting Started',
@@ -50,6 +58,16 @@ const DocumentationLayout = () => {
       ]
     }
   ];
+
+  const handleNavClick = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
 
   const tableOfContents = [
     { title: 'Introduction', href: '#introduction' },
@@ -108,12 +126,12 @@ const DocumentationLayout = () => {
                 <ul className="docs-nav-section-list">
                   {section.items.map((item, itemIndex) => (
                     <li key={itemIndex}>
-                      <a 
-                        href={item.href} 
+                      <button 
+                        onClick={() => handleNavClick(item.href)}
                         className={`docs-nav-link ${item.active ? 'active' : ''}`}
                       >
                         {item.title}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -307,9 +325,9 @@ const DocumentationLayout = () => {
           <h3>Table of contents</h3>
           <nav>
             {tableOfContents.map((item, index) => (
-              <a key={index} href={item.href} className="docs-toc-link">
+              <button key={index} onClick={() => handleNavClick(item.href)} className="docs-toc-link">
                 {item.title}
-              </a>
+              </button>
             ))}
           </nav>
         </aside>

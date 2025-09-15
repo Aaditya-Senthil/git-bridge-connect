@@ -255,14 +255,18 @@
 
 .docs-nav-section-list .docs-nav-link {
   display: block;
+  width: 100%;
   padding: 8px 24px;
   color: var(--docs-text-muted);
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
+  background: none;
   border: none;
   border-left: 3px solid transparent;
   transition: var(--docs-transition);
+  cursor: pointer;
+  text-align: left;
 }
 
 .docs-nav-section-list .docs-nav-link:hover {
@@ -579,6 +583,12 @@
   border-left: 3px solid transparent;
   padding-left: 12px;
   transition: var(--docs-transition);
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
 }
 
 .docs-toc-link:hover {
