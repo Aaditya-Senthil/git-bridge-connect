@@ -309,14 +309,10 @@
 /* Input Container */
 .input-container {
   padding: var(--spacing-md) var(--spacing-lg);
-  border-top: 1px solid var(--color-border);
   background: var(--color-bg-alt);
   position: sticky;
   bottom: 0;
   transition: all 0.3s ease;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  background: rgba(var(--color-bg-alt), 0.95);
 }
 
 .input-container.welcome-input {
@@ -326,10 +322,6 @@
   transform: translateX(-50%);
   width: calc(100% - var(--spacing-xl) * 2);
   max-width: 600px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  background: var(--color-bg-alt);
 }
 
 .input-wrapper {
@@ -498,10 +490,8 @@
   position: sticky;
   bottom: 0;
   background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
-  padding: var(--spacing-md);
+  /* border-top: 1px solid var(--color-border); */
   z-index: 100;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .input-wrapper {
@@ -536,15 +526,16 @@
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: var(--border-radius-lg);
-  padding: var(--spacing-md);
-  min-width: 50px;
-  min-height: 50px;
-  cursor: pointer;
+  border-radius: var(--border-radius-md);
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: var(--spacing-sm);
 }
 
 .send-button:hover:not(:disabled) {

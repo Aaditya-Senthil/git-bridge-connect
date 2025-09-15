@@ -29,8 +29,6 @@ const DocumentationLayout = () => {
       title: 'Getting Started',
       items: [
         { title: 'Introduction', href: '#introduction', active: true },
-        { title: 'Quick Start', href: '#quick-start' },
-        { title: 'Installation', href: '#installation' }
       ]
     },
     {
@@ -38,7 +36,7 @@ const DocumentationLayout = () => {
       items: [
         { title: 'ICR vs OCR', href: '#icr-vs-ocr' },
         { title: 'RAG Architecture', href: '#rag-architecture' },
-        { title: 'Prompt Engineering', href: '#prompt-engineering' }
+        { title: 'AWS', href: '#aws' }
       ]
     },
     {
@@ -70,12 +68,11 @@ const DocumentationLayout = () => {
   };
 
   const tableOfContents = [
-    { title: 'Introduction', href: '#introduction' },
-    { title: 'What is ICR?', href: '#what-is-icr' },
-    { title: 'Key Features', href: '#key-features' },
-    { title: 'Getting Started', href: '#getting-started' },
-    { title: 'Basic Usage', href: '#basic-usage' },
-    { title: 'Advanced Features', href: '#advanced-features' }
+    { title: 'LLAMA Docs', href: '#introduction' },
+    { title: 'AWS Architecture', href: '#what-is-icr' },
+    { title: 'RAG Model', href: '#key-features' },
+    { title: 'Hugging Face', href: '#getting-started' },
+    { title: 'Groq Embeddings', href: '#basic-usage' },
   ];
 
   return (
@@ -87,15 +84,11 @@ const DocumentationLayout = () => {
             <Menu size={20} />
           </button>
           <div className="docs-logo">
-            <span className="docs-logo-icon">🦙</span>
-            <span className="docs-logo-text">ICR Docs</span>
+            <span className="docs-logo-icon"></span>
+            <span className="docs-logo-text">Docs</span>
           </div>
           <nav className="docs-main-nav">
             <a href="#home" className="docs-nav-link active">Home</a>
-            <a href="#learn" className="docs-nav-link">Learn</a>
-            <a href="#api" className="docs-nav-link">API Reference</a>
-            <a href="#examples" className="docs-nav-link">Examples</a>
-            <a href="#community" className="docs-nav-link">Community</a>
           </nav>
         </div>
         <div className="docs-header-right">
@@ -175,34 +168,50 @@ const DocumentationLayout = () => {
                 </div>
               </div>
 
-              <section id="introduction">
-                <h2>Introduction</h2>
-                <h3>What is ICR?</h3>
-                <p>
+              <section id="introduction" style={{ marginBottom: '4rem' }}>
+                <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Introduction</h2>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>What is ICR?</h3>
+                <p style={{ marginBottom: '2rem', lineHeight: '1.6' }}>
                   ICR (Intelligent Character Recognition) goes beyond traditional OCR by leveraging AI and natural language processing 
                   to understand document context, extract meaningful information, and adapt to various document formats without 
                   predefined templates.
                 </p>
 
-                <div className="docs-feature-comparison">
-                  <div className="docs-comparison-item">
-                    <h4>🤖 ICR (Our Approach)</h4>
-                    <ul>
-                      <li>Prompt-driven extraction</li>
-                      <li>No templates required</li>
-                      <li>Context-aware understanding</li>
-                      <li>Flexible field definitions</li>
-                      <li>AI-powered accuracy</li>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+                  <div style={{
+                    padding: '1.5rem',
+                    backgroundColor: darkMode ? '#1e293b' : '#ffffff',
+                    border: `1px solid ${darkMode ? '#10b981' : '#10b981'}`,
+                    borderRadius: '0.75rem'
+                  }}>
+                    <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#10b981' }}>
+                      🤖 ICR (Our Approach)
+                    </h4>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                      {['Prompt-driven extraction', 'No templates required', 'Context-aware understanding', 'Flexible field definitions', 'AI-powered accuracy'].map((item, i) => (
+                        <li key={i} style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <span style={{ color: '#10b981' }}>✓</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
-                  </div>
-                  <div className="docs-comparison-item">
-                    <h4>📄 Traditional OCR</h4>
-                    <ul>
-                      <li>Template-based extraction</li>
-                      <li>Rigid field positioning</li>
-                      <li>Case-sensitive matching</li>
-                      <li>Limited adaptability</li>
-                      <li>Manual configuration</li>
+                  </div>  
+                  <div style={{
+                    padding: '1.5rem',
+                    backgroundColor: darkMode ? '#1e293b' : '#ffffff',
+                    border: `1px solid ${darkMode ? '#64748b' : '#64748b'}`,
+                    borderRadius: '0.75rem'
+                  }}>
+                    <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#64748b' }}>
+                      📄 Traditional OCR
+                    </h4>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                      {['Template-based extraction', 'Rigid field positioning', 'Case-sensitive matching', 'Limited adaptability', 'Manual configuration'].map((item, i) => (
+                        <li key={i} style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <span style={{ color: '#64748b' }}>−</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -298,6 +307,676 @@ const DocumentationLayout = () => {
                 </div>
               </section>
 
+                            <section id="rag-architecture" style={{ marginBottom: '4rem' }}>
+                              <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>RAG Architecture</h2>
+                              
+                              <p style={{ marginBottom: '2rem', lineHeight: '1.6' }}>
+                                Our Retrieval-Augmented Generation (RAG) architecture combines the power of large language models with a robust document understanding pipeline to deliver highly accurate extraction results.
+                              </p>
+              
+                              <div style={{
+                                padding: '2rem',
+                                backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                borderRadius: '0.75rem',
+                                marginBottom: '2rem'
+                              }}>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '1rem' }}>Architecture Components</h3>
+                                
+                                <div style={{ display: 'grid', gap: '1.5rem' }}>
+                                  {[
+                                    {
+                                      title: '1. Document Preprocessing',
+                                      desc: 'Advanced OCR and layout analysis to extract text while preserving document structure',
+                                      features: ['Multi-format support (PDF, images, Word)', 'Layout detection and preservation', 'Text quality enhancement', 'Table and form recognition']
+                                    },
+                                    {
+                                      title: '2. Vector Embedding',
+                                      desc: 'Convert document content into high-dimensional vectors for semantic understanding',
+                                      features: ['Contextual embeddings', 'Multi-modal representation', 'Semantic chunking', 'Relationship mapping']
+                                    },
+                                    {
+                                      title: '3. Retrieval System',
+                                      desc: 'Intelligent retrieval of relevant document sections based on extraction prompts',
+                                      features: ['Semantic similarity search', 'Context-aware retrieval', 'Multi-hop reasoning', 'Relevance scoring']
+                                    },
+                                    {
+                                      title: '4. Generation & Extraction',
+                                      desc: 'LLM-powered extraction using retrieved context and user-defined schemas',
+                                      features: ['Prompt-based extraction', 'Schema validation', 'Confidence scoring', 'Error correction']
+                                    }
+                                  ].map((component, index) => (
+                                    <div key={index} style={{
+                                      padding: '1.5rem',
+                                      backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                      borderRadius: '0.5rem',
+                                      border: `1px solid ${darkMode ? '#475569' : '#d1d5db'}`
+                                    }}>
+                                      <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.75rem', color: '#3b82f6' }}>
+                                        {component.title}
+                                      </h4>
+                                      <p style={{ marginBottom: '1rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                        {component.desc}
+                                      </p>
+                                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
+                                        {component.features.map((feature, i) => (
+                                          <div key={i} style={{ fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            <span style={{ color: '#10b981' }}>•</span>
+                                            <span>{feature}</span>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+              
+                              <div style={{
+                                padding: '1.5rem',
+                                backgroundColor: darkMode ? '#1e40af20' : '#3b82f620',
+                                border: `1px solid ${darkMode ? '#3b82f6' : '#3b82f6'}`,
+                                borderRadius: '0.75rem',
+                                marginBottom: '2rem'
+                              }}>
+                                <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.75rem', color: '#3b82f6' }}>
+                                  💡 RAG Benefits
+                                </h3>
+                                <p style={{ marginBottom: '0', lineHeight: '1.6' }}>
+                                  By combining retrieval with generation, our RAG architecture ensures that extraction is both contextually aware and highly accurate. 
+                                  The system can understand document relationships, maintain context across pages, and adapt to new document types without retraining.
+                                </p>
+                              </div>
+                            </section>
+              
+                            <section id="api-reference" style={{ marginBottom: '4rem' }}>
+                              <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>API Reference</h2>
+                              
+                              <div id="extraction-api" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Extraction API</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Extract structured data from documents using AI-powered analysis.
+                                </p>
+              
+                                <div style={{
+                                  backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                  border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                  borderRadius: '0.75rem',
+                                  overflow: 'hidden',
+                                  marginBottom: '1.5rem'
+                                }}>
+                                  <div style={{
+                                    padding: '1rem 1.5rem',
+                                    backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                    borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontFamily: 'monospace', fontWeight: '600' }}>POST /api/v1/extraction</span>
+                                    <button 
+                                      onClick={() => copyCode(`curl -X POST https://api.icr.dev/v1/extraction \\
+                -H "Authorization: Bearer YOUR_API_KEY" \\
+                -H "Content-Type: application/json" \\
+                -d '{
+                  "filename": "invoice.pdf",
+                  "file_content": "base64_encoded_content",
+                  "config": {
+                    "extraction_mode": "ACCURATE",
+                    "data_schema": {
+                      "type": "object",
+                      "properties": {
+                        "invoice_number": { 
+                          "type": "string", 
+                          "description": "The invoice number" 
+                        },
+                        "total_amount": { 
+                          "type": "number", 
+                          "description": "Total amount due" 
+                        },
+                        "line_items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": { "type": "string" },
+                              "quantity": { "type": "number" },
+                              "unit_price": { "type": "number" }
+                            }
+                          }
+                        }
+                      },
+                      "required": ["invoice_number", "total_amount"]
+                    }
+                  }
+                }'`, 1)}
+                                      style={{
+                                        backgroundColor: darkMode ? '#374151' : '#e5e7eb',
+                                        border: 'none',
+                                        borderRadius: '0.375rem',
+                                        padding: '0.5rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                      }}
+                                    >
+                                      {copiedCode === 1 ? <Check size={16} /> : <Copy size={16} />}
+                                    </button>
+                                  </div>
+                                  <pre style={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    fontFamily: 'monospace',
+                                    fontSize: '0.875rem',
+                                    lineHeight: '1.5',
+                                    overflow: 'auto',
+                                    backgroundColor: 'transparent'
+                                  }}>
+              {`curl -X POST https://api.icr.dev/v1/extraction \\
+                -H "Authorization: Bearer YOUR_API_KEY" \\
+                -H "Content-Type: application/json" \\
+                -d '{
+                  "filename": "invoice.pdf",
+                  "file_content": "base64_encoded_content",
+                  "config": {
+                    "extraction_mode": "ACCURATE",
+                    "data_schema": {
+                      "type": "object",
+                      "properties": {
+                        "invoice_number": { 
+                          "type": "string", 
+                          "description": "The invoice number" 
+                        },
+                        "total_amount": { 
+                          "type": "number", 
+                          "description": "Total amount due" 
+                        },
+                        "line_items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": { "type": "string" },
+                              "quantity": { "type": "number" },
+                              "unit_price": { "type": "number" }
+                            }
+                          }
+                        }
+                      },
+                      "required": ["invoice_number", "total_amount"]
+                    }
+                  }
+                }'`}
+                                  </pre>
+                                </div>
+              
+                                <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem' }}>Parameters</h4>
+                                <div style={{ overflowX: 'auto' }}>
+                                  <table style={{
+                                    width: '100%',
+                                    borderCollapse: 'collapse',
+                                    marginBottom: '2rem',
+                                    fontSize: '0.875rem'
+                                  }}>
+                                    <thead>
+                                      <tr style={{ backgroundColor: darkMode ? '#1e293b' : '#f8fafc' }}>
+                                        <th style={{ padding: '0.75rem', textAlign: 'left', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>Parameter</th>
+                                        <th style={{ padding: '0.75rem', textAlign: 'left', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>Type</th>
+                                        <th style={{ padding: '0.75rem', textAlign: 'left', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>Required</th>
+                                        <th style={{ padding: '0.75rem', textAlign: 'left', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>Description</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {[
+                                        { param: 'filename', type: 'string', required: 'Yes', desc: 'Original filename of the document' },
+                                        { param: 'file_content', type: 'string', required: 'Yes', desc: 'Base64 encoded file content' },
+                                        { param: 'config.extraction_mode', type: 'string', required: 'No', desc: 'FAST, ACCURATE, or COMPREHENSIVE (default: ACCURATE)' },
+                                        { param: 'config.data_schema', type: 'object', required: 'Yes', desc: 'JSON Schema defining the expected output structure' }
+                                      ].map((row, i) => (
+                                        <tr key={i}>
+                                          <td style={{ padding: '0.75rem', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`, fontFamily: 'monospace' }}>{row.param}</td>
+                                          <td style={{ padding: '0.75rem', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>{row.type}</td>
+                                          <td style={{ padding: '0.75rem', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>
+                                            <span style={{ 
+                                              color: row.required === 'Yes' ? '#ef4444' : '#10b981',
+                                              fontWeight: '600'
+                                            }}>
+                                              {row.required}
+                                            </span>
+                                          </td>
+                                          <td style={{ padding: '0.75rem', border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}` }}>{row.desc}</td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+              
+                              <div id="status-api" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Status API</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Check the status of an extraction job.
+                                </p>
+              
+                                <div style={{
+                                  backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                  border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                  borderRadius: '0.75rem',
+                                  overflow: 'hidden',
+                                  marginBottom: '1.5rem'
+                                }}>
+                                  <div style={{
+                                    padding: '1rem 1.5rem',
+                                    backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                    borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontFamily: 'monospace', fontWeight: '600' }}></span>
+                                    <button 
+                                      onClick={() => copyCode(`curl -X GET https://api.icr.dev/v1/extraction/abc123/status \\
+                -H "Authorization: Bearer YOUR_API_KEY"`, 2)}
+                                      style={{
+                                        backgroundColor: darkMode ? '#374151' : '#e5e7eb',
+                                        border: 'none',
+                                        borderRadius: '0.375rem',
+                                        padding: '0.5rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                      }}
+                                    >
+                                      {copiedCode === 2 ? <Check size={16} /> : <Copy size={16} />}
+                                    </button>
+                                  </div>
+                                  <pre style={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    fontFamily: 'monospace',
+                                    fontSize: '0.875rem',
+                                    lineHeight: '1.5',
+                                    overflow: 'auto',
+                                    backgroundColor: 'transparent'
+                                  }}>
+              {`curl -X GET https://api.icr.dev/v1/extraction/abc123/status \\
+                -H "Authorization: Bearer YOUR_API_KEY"`}
+                                  </pre>
+                                </div>
+                              </div>
+              
+                              <div id="history-api" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>History API</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Retrieve extraction history and analytics.
+                                </p>
+              
+                                <div style={{
+                                  backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                  border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                  borderRadius: '0.75rem',
+                                  overflow: 'hidden',
+                                  marginBottom: '2rem'
+                                }}>
+                                  <div style={{
+                                    padding: '1rem 1.5rem',
+                                    backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                    borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontFamily: 'monospace', fontWeight: '600' }}>GET /api/v1/history</span>
+                                    <button 
+                                      onClick={() => copyCode(`curl -X GET "https://api.icr.dev/v1/history?limit=10&offset=0" \\
+                -H "Authorization: Bearer YOUR_API_KEY"`, 3)}
+                                      style={{
+                                        backgroundColor: darkMode ? '#374151' : '#e5e7eb',
+                                        border: 'none',
+                                        borderRadius: '0.375rem',
+                                        padding: '0.5rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                      }}
+                                    >
+                                      {copiedCode === 3 ? <Check size={16} /> : <Copy size={16} />}
+                                    </button>
+                                  </div>
+                                  <pre style={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    fontFamily: 'monospace',
+                                    fontSize: '0.875rem',
+                                    lineHeight: '1.5',
+                                    overflow: 'auto',
+                                    backgroundColor: 'transparent'
+                                  }}>
+              {`curl -X GET "https://api.icr.dev/v1/history?limit=10&offset=0" \\
+                -H "Authorization: Bearer YOUR_API_KEY"`}
+                                  </pre>
+                                </div>
+                              </div>
+                            </section>
+              
+                            <section id="examples" style={{ marginBottom: '4rem' }}>
+                              <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Examples</h2>
+                              
+                              <div id="invoice-example" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Invoice Processing</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Extract key information from invoices including line items, totals, and vendor details.
+                                </p>
+              
+                                <div style={{
+                                  backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                  border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                  borderRadius: '0.75rem',
+                                  overflow: 'hidden',
+                                  marginBottom: '1.5rem'
+                                }}>
+                                  <div style={{
+                                    padding: '1rem 1.5rem',
+                                    backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                    borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontWeight: '600' }}>Invoice Schema Example</span>
+                                    <button 
+                                      onClick={() => copyCode(`{
+                "type": "object",
+                "properties": {
+                  "vendor": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "address": { "type": "string" },
+                      "phone": { "type": "string" },
+                      "email": { "type": "string" }
+                    }
+                  },
+                  "invoice_details": {
+                    "type": "object", 
+                    "properties": {
+                      "invoice_number": { "type": "string" },
+                      "invoice_date": { "type": "string", "format": "date" },
+                      "due_date": { "type": "string", "format": "date" },
+                      "payment_terms": { "type": "string" }
+                    }
+                  },
+                  "line_items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "description": { "type": "string" },
+                        "quantity": { "type": "number" },
+                        "unit_price": { "type": "number" },
+                        "total": { "type": "number" }
+                      }
+                    }
+                  },
+                  "totals": {
+                    "type": "object",
+                    "properties": {
+                      "subtotal": { "type": "number" },
+                      "tax": { "type": "number" },
+                      "total": { "type": "number" }
+                    }
+                  }
+                },
+                "required": ["vendor", "invoice_details", "line_items", "totals"]
+              }`, 4)}
+                                      style={{
+                                        backgroundColor: darkMode ? '#374151' : '#e5e7eb',
+                                        border: 'none',
+                                        borderRadius: '0.375rem',
+                                        padding: '0.5rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                      }}
+                                    >
+                                      {copiedCode === 4 ? <Check size={16} /> : <Copy size={16} />}
+                                    </button>
+                                  </div>
+                                  <pre style={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    fontFamily: 'monospace',
+                                    fontSize: '0.875rem',
+                                    lineHeight: '1.5',
+                                    overflow: 'auto',
+                                    backgroundColor: 'transparent'
+                                  }}>
+              {`{
+                "type": "object",
+                "properties": {
+                  "vendor": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "address": { "type": "string" },
+                      "phone": { "type": "string" },
+                      "email": { "type": "string" }
+                    }
+                  },
+                  "invoice_details": {
+                    "type": "object", 
+                    "properties": {
+                      "invoice_number": { "type": "string" },
+                      "invoice_date": { "type": "string", "format": "date" },
+                      "due_date": { "type": "string", "format": "date" },
+                      "payment_terms": { "type": "string" }
+                    }
+                  },
+                  "line_items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "description": { "type": "string" },
+                        "quantity": { "type": "number" },
+                        "unit_price": { "type": "number" },
+                        "total": { "type": "number" }
+                      }
+                    }
+                  },
+                  "totals": {
+                    "type": "object",
+                    "properties": {
+                      "subtotal": { "type": "number" },
+                      "tax": { "type": "number" },
+                      "total": { "type": "number" }
+                    }
+                  }
+                },
+                "required": ["vendor", "invoice_details", "line_items", "totals"]
+              }`}
+                                  </pre>
+                                </div>
+                              </div>
+              
+                              <div id="form-example" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Form Extraction</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Extract structured data from forms, applications, and surveys.
+                                </p>
+              
+                                <div style={{
+                                  backgroundColor: darkMode ? '#1e293b' : '#f8fafc',
+                                  border: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                  borderRadius: '0.75rem',
+                                  overflow: 'hidden',
+                                  marginBottom: '1.5rem'
+                                }}>
+                                  <div style={{
+                                    padding: '1rem 1.5rem',
+                                    backgroundColor: darkMode ? '#0f172a' : '#ffffff',
+                                    borderBottom: `1px solid ${darkMode ? '#334155' : '#e2e8f0'}`,
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
+                                  }}>
+                                    <span style={{ fontWeight: '600' }}>Application Form Schema</span>
+                                    <button 
+                                      onClick={() => copyCode(`{
+                "type": "object",
+                "properties": {
+                  "personal_info": {
+                    "type": "object",
+                    "properties": {
+                      "full_name": { "type": "string" },
+                      "date_of_birth": { "type": "string", "format": "date" },
+                      "email": { "type": "string", "format": "email" },
+                      "phone": { "type": "string" },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "street": { "type": "string" },
+                          "city": { "type": "string" },
+                          "state": { "type": "string" },
+                          "zip_code": { "type": "string" }
+                        }
+                      }
+                    }
+                  },
+                  "employment": {
+                    "type": "object",
+                    "properties": {
+                      "current_employer": { "type": "string" },
+                      "job_title": { "type": "string" },
+                      "annual_income": { "type": "number" },
+                      "employment_duration": { "type": "string" }
+                    }
+                  },
+                  "references": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": { "type": "string" },
+                        "relationship": { "type": "string" },
+                        "contact": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }`, 5)}
+                                      style={{
+                                        backgroundColor: darkMode ? '#374151' : '#e5e7eb',
+                                        border: 'none',
+                                        borderRadius: '0.375rem',
+                                        padding: '0.5rem',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                      }}
+                                    >
+                                      {copiedCode === 5 ? <Check size={16} /> : <Copy size={16} />}
+                                    </button>
+                                  </div>
+                                  <pre style={{
+                                    margin: 0,
+                                    padding: '1.5rem',
+                                    fontFamily: 'monospace',
+                                    fontSize: '0.875rem',
+                                    lineHeight: '1.5',
+                                    overflow: 'auto',
+                                    backgroundColor: 'transparent'
+                                  }}>
+              {`{
+                "type": "object",
+                "properties": {
+                  "personal_info": {
+                    "type": "object",
+                    "properties": {
+                      "full_name": { "type": "string" },
+                      "date_of_birth": { "type": "string", "format": "date" },
+                      "email": { "type": "string", "format": "email" },
+                      "phone": { "type": "string" },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "street": { "type": "string" },
+                          "city": { "type": "string" },
+                          "state": { "type": "string" },
+                          "zip_code": { "type": "string" }
+                        }
+                      }
+                    }
+                  },
+                  "employment": {
+                    "type": "object",
+                    "properties": {
+                      "current_employer": { "type": "string" },
+                      "job_title": { "type": "string" },
+                      "annual_income": { "type": "number" },
+                      "employment_duration": { "type": "string" }
+                    }
+                  },
+                  "references": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": { "type": "string" },
+                        "relationship": { "type": "string" },
+                        "contact": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }`}
+                                  </pre>
+                                </div>
+                              </div>
+              
+                              <div id="custom-fields" style={{ marginBottom: '3rem' }}>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: '600', marginBottom: '1rem' }}>Custom Fields</h3>
+                                <p style={{ marginBottom: '1.5rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                  Define custom extraction fields using natural language descriptions.
+                                </p>
+              
+                                <div style={{
+                                  padding: '1.5rem',
+                                  backgroundColor: darkMode ? '#1e40af20' : '#3b82f620',
+                                  border: `1px solid ${darkMode ? '#3b82f6' : '#3b82f6'}`,
+                                  borderRadius: '0.75rem',
+                                  marginBottom: '2rem'
+                                }}>
+                                  <h4 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#3b82f6' }}>
+                                    💡 Natural Language Prompts
+                                  </h4>
+                                  <div style={{ display: 'grid', gap: '1rem' }}>
+                                    {[
+                                      { prompt: '"Find all monetary amounts and their descriptions"', use: 'Financial documents, receipts' },
+                                      { prompt: '"Extract names, titles, and contact information"', use: 'Business cards, resumes' },
+                                      { prompt: '"Identify key dates and their associated events"', use: 'Contracts, agreements' },
+                                      { prompt: '"Find product names, quantities, and prices"', use: 'Purchase orders, catalogs' }
+                                    ].map((example, index) => (
+                                      <div key={index} style={{
+                                        padding: '1rem',
+                                        backgroundColor: darkMode ? '#0f172a80' : '#ffffff80',
+                                        borderRadius: '0.5rem',
+                                        border: `1px solid ${darkMode ? '#475569' : '#d1d5db'}`
+                                      }}>
+                                        <div style={{ fontWeight: '600', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
+                                          {example.prompt}
+                                        </div>
+                                        <div style={{ fontSize: '0.875rem', color: darkMode ? '#94a3b8' : '#64748b' }}>
+                                          Best for: {example.use}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </section>
+              
+                           
+
               <section id="advanced-features">
                 <h2>Advanced Features</h2>
                 <div className="docs-info-box">
@@ -362,7 +1041,7 @@ const DocumentationLayout = () => {
           </div>
         </div>
         <div className="docs-footer-bottom">
-          <p>&copy; 2024 ICR Documentation. Built with ❤️ for developers.</p>
+          <p>&copy; 2025 ICR-RAG Documentation. Built with ❤️ for developers. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
